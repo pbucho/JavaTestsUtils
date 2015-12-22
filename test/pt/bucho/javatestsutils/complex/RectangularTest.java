@@ -10,7 +10,7 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RectangularTest {
+public class RectangularTest extends CommonTestClass{
 
 	Rectangular num1, num2;
 	Polar p1;
@@ -80,7 +80,7 @@ public class RectangularTest {
 	}
 	
 	@Test
-	public void polarToRectangularTest(){
+	public void rectangularToPolarTest(){
 		
 		Polar polar = num1.toPolar();
 		
@@ -120,6 +120,9 @@ public class RectangularTest {
 		
 		num1.setRealPart(1.0);
 		assertEquals("1.0-1.0i", num1.toString());
+		
+		num1.setImaginaryPart(0.0);
+		assertEquals("1.0+0.0i", num1.toString());
 		
 	}
 	
