@@ -1,7 +1,11 @@
 package pt.bucho.javatestsutils.complex;
 
-public class Rectangular implements ComplexNumber {
+enum Signal {
+	POSITIVE, NEGATIVE, ZERO;
+}
 
+public class Rectangular implements ComplexNumber {
+	
 	private double realPart;
 	private double imaginaryPart;
 	
@@ -118,7 +122,54 @@ public class Rectangular implements ComplexNumber {
 
 	@Override
 	public Quadrant getQuadrant() {
+		Signal realSignal = getRealSignal();
+		Signal imaginarySignal = getImaginarySignal();
+		
+		switch (realSignal) {
+		case POSITIVE:
+			if(imaginarySignal.equals(Signal.POSITIVE)) {
+				return Quadrant.FIRST;
+			}else if(imaginarySignal.equals(Signal.NEGATIVE)){
+				return Quadrant.FOURTH;
+			}else{
+				return Quadrant.POSITIVE_REAL_AXIS;
+			}
+		case NEGATIVE:
+			if(imaginarySignal.equals(Signal.POSITIVE)){
+				return Quadrant.SECOND;
+			}else if(imaginarySignal.equals(Signal.NEGATIVE)){
+				return Quadrant.THRID;
+			}else{
+				return Quadrant.NEGATIVE_REAL_AXIS;
+			}
+		case ZERO:
+			if(imaginarySignal.equals(Signal.POSITIVE)){
+				return Quadrant.POSITIVE_IMAGINARY_AXIS;
+			}else if(imaginarySignal.equals(Signal.NEGATIVE)){
+				return Quadrant.NEGATIVE_IMAGINARY_AXIS;
+			}else{
+				return Quadrant.ORIGIN;
+			}
+		}
 		return null;
+	}
+	
+	private Signal getRealSignal(){
+		if(realPart > 0){
+			return Signal.POSITIVE; 
+		}else if(realPart < 0){
+			return Signal.NEGATIVE;
+		}
+		return Signal.ZERO;
+	}
+	
+	private Signal getImaginarySignal(){
+		if(imaginaryPart > 0){
+			return Signal.POSITIVE; 
+		}else if(imaginaryPart < 0){
+			return Signal.NEGATIVE;
+		}
+		return Signal.ZERO;
 	}
 
 }

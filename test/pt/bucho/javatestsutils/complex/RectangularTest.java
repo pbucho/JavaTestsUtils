@@ -1,6 +1,7 @@
 package pt.bucho.javatestsutils.complex;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -58,6 +59,26 @@ public class RectangularTest {
 	}
 	
 	@Test
+	public void rectuangularMultiplicationTest(){
+		fail("NYI");
+	}
+	
+	@Test
+	public void rectuangularDivisionTest(){
+		fail("NYI");
+	}
+	
+	@Test
+	public void rectuangularPowerTest(){
+		fail("NYI");
+	}
+	
+	@Test
+	public void rectuangularSqrtTest(){
+		fail("NYI");
+	}
+	
+	@Test
 	public void rectangularToRectangularReturnsItself(){
 		assertSame(num1, num1.toRectangular());
 	}
@@ -108,17 +129,4 @@ public class RectangularTest {
 		
 	}
 	
-	@Test
-	public void quadrantTest(){
-		assertEquals(Quadrant.FIRST.toString(), num1.getQuadrant());
-		
-		num1.setRealPart(-1.0);
-		assertEquals(Quadrant.SECOND.toString(), num1.getQuadrant());
-		
-		num1.setImaginaryPart(-1.0);
-		assertEquals(Quadrant.THRID.toString(), num1.getQuadrant());
-		
-		num1.setRealPart(1.0);
-		assertEquals(Quadrant.FOURTH.toString(), num1.getQuadrant());
-	}
 }
