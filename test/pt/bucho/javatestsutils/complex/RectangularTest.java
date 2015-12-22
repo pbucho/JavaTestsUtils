@@ -1,7 +1,9 @@
 package pt.bucho.javatestsutils.complex;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -14,16 +16,14 @@ public class RectangularTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		num1 = new Rectangular();
+		num1 = new Rectangular(1.0, 1.0);
 		num2 = EasyMock.createMock(Rectangular.class);
 		p1 = EasyMock.createMock(Polar.class);
 	}
 
 	@Test
 	public void rectanguarAdditionTest() {
-		num1.setRealPart(1.0);
-		num1.setImaginaryPart(1.0);
-		
+
 		EasyMock.expect(num2.toRectangular()).andReturn(num2);
 		EasyMock.expect(num2.getRealPart()).andReturn(1.0);
 		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
@@ -40,9 +40,7 @@ public class RectangularTest {
 	}
 	
 	@Test
-	public void rectanguarSubtractionTest() {
-		num1.setRealPart(1.0);
-		num1.setImaginaryPart(1.0);
+	public void rectangularSubtractionTest() {
 		
 		EasyMock.expect(num2.toRectangular()).andReturn(num2);
 		EasyMock.expect(num2.getRealPart()).andReturn(1.0);
@@ -66,13 +64,61 @@ public class RectangularTest {
 	
 	@Test
 	public void polarToRectangularTest(){
-		num1.setRealPart(1.0);
-		num1.setImaginaryPart(1.0);
 		
 		Polar polar = num1.toPolar();
 		
 		assertEquals(Math.sqrt(2.0), polar.getR(), 0.0);
 		assertEquals(Math.PI / 4.0, polar.getTheta(), 0.0001);
 		
+	}
+	
+	@Test
+	public void equalsTest(){
+
+		EasyMock.expect(num2.toRectangular()).andReturn(num2);
+		EasyMock.expect(num2.getRealPart()).andReturn(1.0);
+		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
+		
+		EasyMock.replay(num2);
+		assertTrue(num1.equals(num2));
+		EasyMock.verify(num2);
+		
+		EasyMock.reset(num2);
+		EasyMock.expect(num2.toRectangular()).andReturn(num2);
+		EasyMock.expect(num2.getRealPart()).andReturn(0.0);
+		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
+		
+		EasyMock.replay(num2);
+		assertFalse(num1.equals(num2));
+		EasyMock.verify(num2);
+	}
+	
+	@Test
+	public void stringTest(){
+		assertEquals("1.0+1.0i", num1.toString());
+		
+		num1.setRealPart(-1.0);
+		assertEquals("-1.0+1.0i", num1.toString());
+		
+		num1.setImaginaryPart(-1.0);
+		assertEquals("-1.0-1.0i", num1.toString());
+		
+		num1.setRealPart(1.0);
+		assertEquals("1.0-1.0i", num1.toString());
+		
+	}
+	
+	@Test
+	public void quadrantTest(){
+		assertEquals(Quadrant.FIRST.toString(), num1.getQuadrant());
+		
+		num1.setRealPart(-1.0);
+		assertEquals(Quadrant.SECOND.toString(), num1.getQuadrant());
+		
+		num1.setImaginaryPart(-1.0);
+		assertEquals(Quadrant.THRID.toString(), num1.getQuadrant());
+		
+		num1.setRealPart(1.0);
+		assertEquals(Quadrant.FOURTH.toString(), num1.getQuadrant());
 	}
 }

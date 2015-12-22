@@ -1,7 +1,9 @@
 package pt.bucho.javatestsutils.complex;
 
 public enum Quadrant {
-	
-	FIRST, SECOND, THRID, FOURTH;
-	
+
+	FIRST, SECOND, THRID, FOURTH,
+	POSITIVE_REAL_AXIS, NEGATIVE_REAL_AXIS, POSITIVE_IMAGINARY_AXIS, NEGATIVE_IMAGINARY_AXIS,
+	ORIGIN;
+
 }

@@ -70,8 +70,6 @@ public class Rectangular implements ComplexNumber {
 		String number = "" + realPart;
 		if (imaginaryPart >= 0) {
 			number += "+";
-		} else {
-			number += "-";
 		}
 		number += imaginaryPart + "i";
 
@@ -80,8 +78,12 @@ public class Rectangular implements ComplexNumber {
 	
 	@Override
 	public boolean equals(Object o){
-		// TODO Auto-generated method stub
-		return false;
+		if(!(o instanceof ComplexNumber)){
+			return false;
+		}
+		Rectangular num = ((ComplexNumber) o).toRectangular();
+		
+		return num.getRealPart() == realPart & num.getImaginaryPart() == imaginaryPart;
 	}
 
 	@Override
@@ -116,7 +118,6 @@ public class Rectangular implements ComplexNumber {
 
 	@Override
 	public Quadrant getQuadrant() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
