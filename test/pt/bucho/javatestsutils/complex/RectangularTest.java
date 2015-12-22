@@ -25,9 +25,7 @@ public class RectangularTest {
 	@Test
 	public void rectanguarAdditionTest() {
 
-		EasyMock.expect(num2.toRectangular()).andReturn(num2);
-		EasyMock.expect(num2.getRealPart()).andReturn(1.0);
-		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
+		mockExpectation();
 		
 		EasyMock.replay(num2);
 		
@@ -43,9 +41,7 @@ public class RectangularTest {
 	@Test
 	public void rectangularSubtractionTest() {
 		
-		EasyMock.expect(num2.toRectangular()).andReturn(num2);
-		EasyMock.expect(num2.getRealPart()).andReturn(1.0);
-		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
+		mockExpectation();
 		
 		EasyMock.replay(num2);
 		
@@ -96,9 +92,7 @@ public class RectangularTest {
 	@Test
 	public void equalsTest(){
 
-		EasyMock.expect(num2.toRectangular()).andReturn(num2);
-		EasyMock.expect(num2.getRealPart()).andReturn(1.0);
-		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
+		mockExpectation();
 		
 		EasyMock.replay(num2);
 		assertTrue(num1.equals(num2));
@@ -127,6 +121,12 @@ public class RectangularTest {
 		num1.setRealPart(1.0);
 		assertEquals("1.0-1.0i", num1.toString());
 		
+	}
+	
+	private void mockExpectation(){
+		EasyMock.expect(num2.toRectangular()).andReturn(num2);
+		EasyMock.expect(num2.getRealPart()).andReturn(1.0);
+		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
 	}
 	
 }
