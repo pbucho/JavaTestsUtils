@@ -41,8 +41,18 @@ public class Rectangular implements ComplexNumber {
 
 	@Override
 	public ComplexNumber multiply(ComplexNumber number) {
-		// TODO Auto-generated method stub
-		return null;
+		Polar numPol = number.toPolar();
+		Polar thisPol = toPolar();
+		
+		thisPol.setR(thisPol.getR() * numPol.getR());
+		thisPol.setTheta(thisPol.getTheta() + numPol.getTheta());
+		
+		Rectangular thisRec = thisPol.toRectangular();
+		
+		realPart = thisRec.getRealPart();
+		imaginaryPart = thisRec.getImaginaryPart();
+		
+		return this;
 	}
 
 	@Override

@@ -12,12 +12,19 @@ import org.junit.Test;
 
 public class RectangularTest extends CommonTestClass{
 
+	private final double re1 = 1;
+	private final double re2 = 2;
+	private final double im1 = 1;
+	private final double im2 = 2;
+	private final double r1 = Math.sqrt(Math.pow(re1, 2) + Math.pow(im1, 2));
+	private final double t1 = Math.asin(im1 / r1);
+	
 	Rectangular num1, num2;
 	Polar p1;
 	
 	@Before
 	public void setUp() throws Exception {
-		num1 = new Rectangular(1.0, 1.0);
+		num1 = new Rectangular(re1, im1);
 		num2 = EasyMock.createMock(Rectangular.class);
 		p1 = EasyMock.createMock(Polar.class);
 	}
@@ -33,8 +40,8 @@ public class RectangularTest extends CommonTestClass{
 		
 		EasyMock.verify(num2);
 		
-		assertEquals(2.0, num1.getRealPart(), 0.0);
-		assertEquals(2.0, num1.getImaginaryPart(), 0.0);
+		assertEquals(re1 + re2, num1.getRealPart(), 0.0);
+		assertEquals(im1 + im2, num1.getImaginaryPart(), 0.0);
 		
 	}
 	
@@ -49,28 +56,42 @@ public class RectangularTest extends CommonTestClass{
 		
 		EasyMock.verify(num2);
 		
-		assertEquals(0.0, num1.getRealPart(), 0.0);
-		assertEquals(0.0, num1.getImaginaryPart(), 0.0);
+		assertEquals(re1 - re2, num1.getRealPart(), 0.0);
+		assertEquals(im1 - im2, num1.getImaginaryPart(), 0.0);
 		
 	}
 	
 	@Test
-	public void rectuangularMultiplicationTest(){
+	public void rectangularMultiplicationTest(){
+		
+		EasyMock.expect(num2.toPolar()).andReturn(p1);
+		EasyMock.expect(p1.getR()).andReturn(r1);
+		EasyMock.expect(p1.getTheta()).andReturn(t1);
+		
+		EasyMock.replay(num2, p1);		
+		num1.multiply(num2);
+		EasyMock.verify(num2, p1);
+		
+		double expectedRe = (r1 * r2) * Math.cos(t1 + t2);
+		double expectedIm = (r1 * r2) * Math.sin(t1 + t2);
+		
+		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
+		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
+		
+	}
+	
+	@Test
+	public void rectangularDivisionTest(){
 		fail("NYI");
 	}
 	
 	@Test
-	public void rectuangularDivisionTest(){
+	public void rectangularPowerTest(){
 		fail("NYI");
 	}
 	
 	@Test
-	public void rectuangularPowerTest(){
-		fail("NYI");
-	}
-	
-	@Test
-	public void rectuangularSqrtTest(){
+	public void rectangularSqrtTest(){
 		fail("NYI");
 	}
 	
@@ -84,15 +105,17 @@ public class RectangularTest extends CommonTestClass{
 		
 		Polar polar = num1.toPolar();
 		
-		assertEquals(Math.sqrt(2.0), polar.getR(), 0.0);
-		assertEquals(Math.PI / 4.0, polar.getTheta(), 0.0001);
+		assertEquals(r1, polar.getR(), 0.0);
+		assertEquals(t1, polar.getTheta(), 0.0001);
 		
 	}
 	
 	@Test
 	public void equalsTest(){
-
-		mockExpectation();
+		
+		EasyMock.expect(num2.toRectangular()).andReturn(num2);
+		EasyMock.expect(num2.getRealPart()).andReturn(re1);
+		EasyMock.expect(num2.getImaginaryPart()).andReturn(im1);
 		
 		EasyMock.replay(num2);
 		assertTrue(num1.equals(num2));
@@ -100,8 +123,8 @@ public class RectangularTest extends CommonTestClass{
 		
 		EasyMock.reset(num2);
 		EasyMock.expect(num2.toRectangular()).andReturn(num2);
-		EasyMock.expect(num2.getRealPart()).andReturn(0.0);
-		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
+		EasyMock.expect(num2.getRealPart()).andReturn(re2);
+		EasyMock.expect(num2.getImaginaryPart()).andReturn(im2);
 		
 		EasyMock.replay(num2);
 		assertFalse(num1.equals(num2));
@@ -128,8 +151,8 @@ public class RectangularTest extends CommonTestClass{
 	
 	private void mockExpectation(){
 		EasyMock.expect(num2.toRectangular()).andReturn(num2);
-		EasyMock.expect(num2.getRealPart()).andReturn(1.0);
-		EasyMock.expect(num2.getImaginaryPart()).andReturn(1.0);
+		EasyMock.expect(num2.getRealPart()).andReturn(re2);
+		EasyMock.expect(num2.getImaginaryPart()).andReturn(im2);
 	}
 	
 }

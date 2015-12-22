@@ -8,8 +8,6 @@ import org.junit.Test;
 
 public class PolarTest extends CommonTestClass{
 
-	private double re1, re2, im1, im2;
-	private double r1, r2, t1, t2;
 	Polar num1, num2;
 	Rectangular rec;
 	
@@ -18,16 +16,6 @@ public class PolarTest extends CommonTestClass{
 		num1 = new Polar(1.0, 1.0);
 		num2 = EasyMock.createMock(Polar.class);
 		rec = EasyMock.createMock(Rectangular.class);
-		
-		re1 = 1;
-		re2 = 2;
-		im1 = 1;
-		im2 = 2;
-		
-		r1 = Math.sqrt(Math.pow(re1, 2) + Math.pow(im1, 2));
-		r2 = Math.sqrt(Math.pow(re2, 2) + Math.pow(im2, 2));
-		t1 = Math.asin(im1 / r1);
-		t2 = Math.asin(im2 / r2);
 	}
 
 	@Test

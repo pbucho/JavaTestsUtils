@@ -1,22 +1,14 @@
 package pt.bucho.javatestsutils.complex;
 
-import java.util.Random;
-
 public abstract class CommonTestClass {
 	
-	protected double getRandomDouble(){
-		Random r = new Random();
-		return 100.0 * r.nextDouble();
-	}
+	protected final double re1 = 1;
+	protected final double re2 = 2;
+	protected final double im1 = 1;
+	protected final double im2 = 2;
+	protected final double r1 = Math.sqrt(Math.pow(re1, 2) + Math.pow(im1, 2));
+	protected final double r2 = Math.sqrt(Math.pow(re2, 2) + Math.pow(im2, 2));
+	protected final double t1 = Math.asin(im1 / r1);
+	protected final double t2 = Math.asin(im2 / r2);
 	
-	protected double[] getFourRandomDoubles(){
-		double[] doubles = new double[4];
-		
-		for(int i = 0; i < doubles.length; i++){
-			doubles[i] = getRandomDouble();
-		}
-		
-		return doubles;
-	}
-
 }
