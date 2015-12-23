@@ -95,8 +95,13 @@ public class Polar implements ComplexNumber {
 	
 	@Override
 	public boolean equals(Object o){
-		// TODO Auto-generated method stub
-		return false;
+		if(!(o instanceof ComplexNumber)){
+			return false;
+		}
+		
+		Polar num = ((ComplexNumber) o).toPolar();
+		
+		return r == num.getR() & theta == num.getTheta();
 	}
 
 	@Override
