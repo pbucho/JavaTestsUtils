@@ -72,8 +72,8 @@ public class RectangularTest extends CommonTestClass{
 		num1.multiply(num2);
 		EasyMock.verify(num2, p1);
 		
-		double expectedRe = (r1 * r2) * Math.cos(t1 + t2);
-		double expectedIm = (r1 * r2) * Math.sin(t1 + t2);
+		double expectedRe = Math.pow(r1, 2) * Math.cos(2 * t1);
+		double expectedIm = Math.pow(r1, 2) * Math.sin(2 * t1);
 		
 		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
 		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
@@ -82,7 +82,21 @@ public class RectangularTest extends CommonTestClass{
 	
 	@Test
 	public void rectangularDivisionTest(){
-		fail("NYI");
+		
+		EasyMock.expect(num2.toPolar()).andReturn(p1);
+		EasyMock.expect(p1.getR()).andReturn(r1);
+		EasyMock.expect(p1.getTheta()).andReturn(t1);
+		
+		EasyMock.replay(num2, p1);		
+		num1.divide(num2);
+		EasyMock.verify(num2, p1);
+		
+		double expectedRe = Math.cos(0.0);
+		double expectedIm = Math.sin(0.0);
+		
+		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
+		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
+		
 	}
 	
 	@Test
