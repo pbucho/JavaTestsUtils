@@ -136,6 +136,17 @@ public class RectangularTest extends CommonTestClass{
 		expectedRe = Math.pow(r1, -1) * Math.cos(-1 * t1);
 		expectedIm = Math.pow(r1, -1) * Math.sin(-1 * t1);
 		
+		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
+		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
+		
+		resetNum1();
+		num1.pow(-8.9845);
+		
+		expectedRe = Math.pow(r1, -8.9845) * Math.cos(-8.9845 * t1);
+		expectedIm = Math.pow(r1, -8.9845) * Math.sin(-8.9845 * t1);
+		
+		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
+		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
 	}
 	
 	@Test
