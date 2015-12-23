@@ -1,7 +1,6 @@
 package pt.bucho.javatestsutils.complex;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -141,7 +140,14 @@ public class RectangularTest extends CommonTestClass{
 	
 	@Test
 	public void rectangularSqrtTest(){
-		fail("NYI");
+		
+		num1.sqrt();
+		
+		double expectedRe = Math.pow(r1, 0.5) * Math.cos(0.5 * t1);
+		double expectedIm = Math.pow(r1, 0.5) * Math.sin(0.5 * t1);
+		
+		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
+		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
 	}
 	
 	@Test

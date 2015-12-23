@@ -73,12 +73,13 @@ public class Rectangular implements ComplexNumber {
 
 	@Override
 	public ComplexNumber sqrt() {
-		// TODO Auto-generated method stub
-		return null;
+		pow(0.5);
+		
+		return this;
 	}
 
 	@Override
-	public ComplexNumber pow(int power) {
+	public ComplexNumber pow(double power) {
 		Polar thisPol = toPolar();
 		
 		thisPol.setR(Math.pow(thisPol.getR(), power));

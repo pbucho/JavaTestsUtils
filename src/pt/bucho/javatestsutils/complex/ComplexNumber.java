@@ -7,7 +7,7 @@ public interface ComplexNumber {
 	public ComplexNumber multiply(ComplexNumber number);
 	public ComplexNumber divide(ComplexNumber number);
 	public ComplexNumber sqrt();
-	public ComplexNumber pow(int power);
+	public ComplexNumber pow(double power);
 	public ComplexNumber conjugate();
 	
 	public Quadrant getQuadrant();

@@ -76,7 +76,7 @@ public class Polar implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber pow(int power) {
+	public ComplexNumber pow(double power) {
 		// TODO Auto-generated method stub
 		return null;
 	}
