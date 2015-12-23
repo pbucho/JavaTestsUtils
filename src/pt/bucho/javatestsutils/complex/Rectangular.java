@@ -8,13 +8,13 @@ public class Rectangular implements ComplexNumber {
 	
 	private double realPart;
 	private double imaginaryPart;
-	
-	public Rectangular(){
+
+	public Rectangular() {
 		this.realPart = 0.0;
 		this.imaginaryPart = 0.0;
 	}
 	
-	public Rectangular(double real, double imaginary){
+	public Rectangular(double real, double imaginary) {
 		this.realPart = real;
 		this.imaginaryPart = imaginary;
 	}
@@ -22,20 +22,20 @@ public class Rectangular implements ComplexNumber {
 	@Override
 	public ComplexNumber add(ComplexNumber number) {
 		Rectangular rec = number.toRectangular();
-		
+
 		this.realPart += rec.getRealPart();
 		this.imaginaryPart += rec.getImaginaryPart();
-		
+
 		return this;
 	}
 
 	@Override
 	public ComplexNumber subtract(ComplexNumber number) {
 		Rectangular rec = number.toRectangular();
-		
+
 		this.realPart -= rec.getRealPart();
 		this.imaginaryPart -= rec.getImaginaryPart();
-		
+
 		return this;
 	}
 
@@ -43,15 +43,15 @@ public class Rectangular implements ComplexNumber {
 	public ComplexNumber multiply(ComplexNumber number) {
 		Polar numPol = number.toPolar();
 		Polar thisPol = toPolar();
-		
+
 		thisPol.setR(thisPol.getR() * numPol.getR());
 		thisPol.setTheta(thisPol.getTheta() + numPol.getTheta());
-		
+
 		Rectangular thisRec = thisPol.toRectangular();
-		
+
 		realPart = thisRec.getRealPart();
 		imaginaryPart = thisRec.getImaginaryPart();
-		
+
 		return this;
 	}
 
@@ -59,37 +59,37 @@ public class Rectangular implements ComplexNumber {
 	public ComplexNumber divide(ComplexNumber number) {
 		Polar numPol = number.toPolar();
 		Polar thisPol = toPolar();
-		
+
 		thisPol.setR(thisPol.getR() / numPol.getR());
 		thisPol.setTheta(thisPol.getTheta() - numPol.getTheta());
-		
+
 		Rectangular thisRec = thisPol.toRectangular();
-		
+
 		realPart = thisRec.getRealPart();
 		imaginaryPart = thisRec.getImaginaryPart();
-		
+
 		return this;
 	}
 
 	@Override
 	public ComplexNumber sqrt() {
 		pow(0.5);
-		
+
 		return this;
 	}
 
 	@Override
 	public ComplexNumber pow(double power) {
 		Polar thisPol = toPolar();
-		
+
 		thisPol.setR(Math.pow(thisPol.getR(), power));
 		thisPol.setTheta(power * thisPol.getTheta());
-		
+
 		Rectangular thisRec = thisPol.toRectangular();
-		
+
 		realPart = thisRec.getRealPart();
 		imaginaryPart = thisRec.getImaginaryPart();
-		
+
 		return this;
 	}
 
@@ -111,12 +111,12 @@ public class Rectangular implements ComplexNumber {
 	}
 	
 	@Override
-	public boolean equals(Object o){
-		if(!(o instanceof ComplexNumber)){
+	public boolean equals(Object o) {
+		if (!(o instanceof ComplexNumber)) {
 			return false;
 		}
 		Rectangular num = ((ComplexNumber) o).toRectangular();
-		
+
 		return num.getRealPart() == realPart & num.getImaginaryPart() == imaginaryPart;
 	}
 
@@ -145,7 +145,7 @@ public class Rectangular implements ComplexNumber {
 	public void setImaginaryPart(double imaginaryPart) {
 		this.imaginaryPart = imaginaryPart;
 	}
-	
+
 	private double getLength() {
 		return Math.sqrt(Math.pow(realPart, 2) + Math.pow(imaginaryPart, 2));
 	}
@@ -154,49 +154,49 @@ public class Rectangular implements ComplexNumber {
 	public Quadrant getQuadrant() {
 		Signal realSignal = getRealSignal();
 		Signal imaginarySignal = getImaginarySignal();
-		
+
 		switch (realSignal) {
 		case POSITIVE:
-			if(imaginarySignal.equals(Signal.POSITIVE)) {
+			if (imaginarySignal.equals(Signal.POSITIVE)) {
 				return Quadrant.FIRST;
-			}else if(imaginarySignal.equals(Signal.NEGATIVE)){
+			} else if (imaginarySignal.equals(Signal.NEGATIVE)) {
 				return Quadrant.FOURTH;
-			}else{
+			} else {
 				return Quadrant.POSITIVE_REAL_AXIS;
 			}
 		case NEGATIVE:
-			if(imaginarySignal.equals(Signal.POSITIVE)){
+			if (imaginarySignal.equals(Signal.POSITIVE)) {
 				return Quadrant.SECOND;
-			}else if(imaginarySignal.equals(Signal.NEGATIVE)){
+			} else if (imaginarySignal.equals(Signal.NEGATIVE)) {
 				return Quadrant.THRID;
-			}else{
+			} else {
 				return Quadrant.NEGATIVE_REAL_AXIS;
 			}
 		case ZERO:
-			if(imaginarySignal.equals(Signal.POSITIVE)){
+			if (imaginarySignal.equals(Signal.POSITIVE)) {
 				return Quadrant.POSITIVE_IMAGINARY_AXIS;
-			}else if(imaginarySignal.equals(Signal.NEGATIVE)){
+			} else if (imaginarySignal.equals(Signal.NEGATIVE)) {
 				return Quadrant.NEGATIVE_IMAGINARY_AXIS;
-			}else{
+			} else {
 				return Quadrant.ORIGIN;
 			}
 		}
 		return null;
 	}
-	
-	private Signal getRealSignal(){
-		if(realPart > 0){
-			return Signal.POSITIVE; 
-		}else if(realPart < 0){
+
+	private Signal getRealSignal() {
+		if (realPart > 0) {
+			return Signal.POSITIVE;
+		} else if (realPart < 0) {
 			return Signal.NEGATIVE;
 		}
 		return Signal.ZERO;
 	}
-	
-	private Signal getImaginarySignal(){
-		if(imaginaryPart > 0){
-			return Signal.POSITIVE; 
-		}else if(imaginaryPart < 0){
+
+	private Signal getImaginarySignal() {
+		if (imaginaryPart > 0) {
+			return Signal.POSITIVE;
+		} else if (imaginaryPart < 0) {
 			return Signal.NEGATIVE;
 		}
 		return Signal.ZERO;

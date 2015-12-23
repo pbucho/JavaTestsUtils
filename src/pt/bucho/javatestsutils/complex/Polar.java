@@ -4,13 +4,13 @@ public class Polar implements ComplexNumber {
 
 	private double r;
 	private double theta;
-	
-	public Polar(){
+
+	public Polar() {
 		this.r = 0.0;
 		this.theta = 0.0;
 	}
-	
-	public Polar(double r, double theta){
+
+	public Polar(double r, double theta) throws IllegalArgumentException {
 		this.r = r;
 		this.theta = theta;
 		checkLength();
@@ -21,15 +21,15 @@ public class Polar implements ComplexNumber {
 	public ComplexNumber add(ComplexNumber number) {
 		Rectangular numRec = number.toRectangular();
 		Rectangular thisRec = toRectangular();
-		
+
 		thisRec.setRealPart(thisRec.getRealPart() + numRec.getRealPart());
 		thisRec.setImaginaryPart(thisRec.getImaginaryPart() + numRec.getImaginaryPart());
-		
+
 		Polar thisPol = thisRec.toPolar();
-		
+
 		r = thisPol.getR();
 		theta = thisPol.getTheta();
-		
+
 		return this;
 	}
 
@@ -71,14 +71,16 @@ public class Polar implements ComplexNumber {
 
 	@Override
 	public ComplexNumber sqrt() {
-		// TODO Auto-generated method stub
+		pow(0.5);
 		return null;
 	}
 
 	@Override
 	public ComplexNumber pow(double power) {
-		// TODO Auto-generated method stub
-		return null;
+		r = Math.pow(r, power);
+		theta = power * theta;
+		
+		return this;
 	}
 
 	@Override
@@ -89,18 +91,17 @@ public class Polar implements ComplexNumber {
 
 	@Override
 	public String toString(){
-		// TODO Auto-generated method stub
-		return null;
+		return r + " cis " + theta;
 	}
 	
 	@Override
-	public boolean equals(Object o){
-		if(!(o instanceof ComplexNumber)){
+	public boolean equals(Object o) {
+		if (!(o instanceof ComplexNumber)) {
 			return false;
 		}
-		
+
 		Polar num = ((ComplexNumber) o).toPolar();
-		
+
 		return r == num.getR() & theta == num.getTheta();
 	}
 
@@ -118,7 +119,7 @@ public class Polar implements ComplexNumber {
 		return r;
 	}
 
-	public void setR(double r) {
+	public void setR(double r) throws IllegalArgumentException {
 		this.r = r;
 		checkLength();
 	}
@@ -137,20 +138,20 @@ public class Polar implements ComplexNumber {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	private void convertToMainAngle(){
-		if(theta <= Math.PI * -1){
+
+	private void convertToMainAngle() {
+		if (theta <= Math.PI * -1) {
 			theta += Math.PI * 2;
-		}else if(theta > Math.PI){
+		} else if (theta > Math.PI) {
 			theta -= Math.PI * 2;
-		}else{
+		} else {
 			return;
 		}
 		convertToMainAngle();
 	}
-	
-	private void checkLength() throws IllegalArgumentException{
-		if(r < 0){
+
+	private void checkLength() throws IllegalArgumentException {
+		if (r < 0) {
 			throw new IllegalArgumentException("Length can't be negative");
 		}
 	}
