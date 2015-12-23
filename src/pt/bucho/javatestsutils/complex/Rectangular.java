@@ -78,9 +78,18 @@ public class Rectangular implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber pow() {
-		// TODO Auto-generated method stub
-		return null;
+	public ComplexNumber pow(int power) {
+		Polar thisPol = toPolar();
+		
+		thisPol.setR(Math.pow(thisPol.getR(), power));
+		thisPol.setTheta(power * thisPol.getTheta());
+		
+		Rectangular thisRec = thisPol.toRectangular();
+		
+		realPart = thisRec.getRealPart();
+		imaginaryPart = thisRec.getImaginaryPart();
+		
+		return this;
 	}
 
 	@Override

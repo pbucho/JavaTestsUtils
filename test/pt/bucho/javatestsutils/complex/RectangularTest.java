@@ -101,7 +101,42 @@ public class RectangularTest extends CommonTestClass{
 	
 	@Test
 	public void rectangularPowerTest(){
-		fail("NYI");
+		
+		double expectedRe;
+		double expectedIm;
+		
+		num1.pow(2);
+		
+		expectedRe = Math.pow(r1, 2) * Math.cos(2 * t1);
+		expectedIm = Math.pow(r1, 2) * Math.sin(2 * t1);
+		
+		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
+		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
+		
+		resetNum1();
+		num1.pow(3);
+		
+		expectedRe = Math.pow(r1, 3) * Math.cos(3 * t1);
+		expectedIm = Math.pow(r1, 3) * Math.sin(3 * t1);
+		
+		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
+		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
+		
+		resetNum1();
+		num1.pow(0);
+		
+		expectedRe = Math.cos(0.0);
+		expectedIm = Math.sin(0.0);
+		
+		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
+		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
+		
+		resetNum1();
+		num1.pow(-1);
+		
+		expectedRe = Math.pow(r1, -1) * Math.cos(-1 * t1);
+		expectedIm = Math.pow(r1, -1) * Math.sin(-1 * t1);
+		
 	}
 	
 	@Test
@@ -167,6 +202,11 @@ public class RectangularTest extends CommonTestClass{
 		EasyMock.expect(num2.toRectangular()).andReturn(num2);
 		EasyMock.expect(num2.getRealPart()).andReturn(re2);
 		EasyMock.expect(num2.getImaginaryPart()).andReturn(im2);
+	}
+	
+	private void resetNum1(){
+		num1.setRealPart(re1);
+		num1.setImaginaryPart(im1);
 	}
 	
 }
