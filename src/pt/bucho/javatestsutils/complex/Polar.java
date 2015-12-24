@@ -149,7 +149,7 @@ public class Polar implements ComplexNumber {
 		
 		convertToMainAngle();
 		
-		if(theta > NEGATIVE_REAL_AXIS && theta < NEGATIVE_IMAGINARY_AXIS){
+		if(theta > NEGATIVE_REAL_AXIS - 2.0 * Math.PI && theta < NEGATIVE_IMAGINARY_AXIS){
 			return Quadrant.THRID;
 		}
 		if(theta > NEGATIVE_IMAGINARY_AXIS && theta < POSITIVE_REAL_AXIS){
@@ -158,7 +158,7 @@ public class Polar implements ComplexNumber {
 		if(theta > POSITIVE_REAL_AXIS && theta < POSITIVE_IMAGINARY_AXIS){
 			return Quadrant.FIRST;
 		}
-		if(theta > POSITIVE_IMAGINARY_AXIS && theta < NEGATIVE_IMAGINARY_AXIS + Math.PI * 2.0){
+		if(theta > POSITIVE_IMAGINARY_AXIS && theta < NEGATIVE_REAL_AXIS){
 			return Quadrant.SECOND;
 		}
 		if(theta == POSITIVE_REAL_AXIS){
