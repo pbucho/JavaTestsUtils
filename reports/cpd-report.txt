@@ -1,0 +1,71 @@
+Found a 12 line (35 tokens) duplication in the following files: 
+Starting at line 48 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Rectangular.java
+Starting at line 64 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Rectangular.java
+
+		thisPol.setTheta(thisPol.getTheta() + numPol.getTheta());
+
+		Rectangular thisRec = thisPol.toRectangular();
+
+		realPart = thisRec.getRealPart();
+		imaginaryPart = thisRec.getImaginaryPart();
+
+		return this;
+	}
+
+	@Override
+	public ComplexNumber divide(ComplexNumber number) {
+=====================================================================
+Found a 12 line (35 tokens) duplication in the following files: 
+Starting at line 26 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Polar.java
+Starting at line 42 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Polar.java
+
+		thisRec.setImaginaryPart(thisRec.getImaginaryPart() + numRec.getImaginaryPart());
+
+		Polar thisPol = thisRec.toPolar();
+
+		r = thisPol.getR();
+		theta = thisPol.getTheta();
+
+		return this;
+	}
+
+	@Override
+	public ComplexNumber subtract(ComplexNumber number) {
+=====================================================================
+Found a 12 line (34 tokens) duplication in the following files: 
+Starting at line 48 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Rectangular.java
+Starting at line 64 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Rectangular.java
+Starting at line 86 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Rectangular.java
+
+		thisPol.setTheta(thisPol.getTheta() + numPol.getTheta());
+
+		Rectangular thisRec = thisPol.toRectangular();
+
+		realPart = thisRec.getRealPart();
+		imaginaryPart = thisRec.getImaginaryPart();
+
+		return this;
+	}
+
+	@Override
+	public ComplexNumber divide(ComplexNumber number) {
+=====================================================================
+Found a 5 line (28 tokens) duplication in the following files: 
+Starting at line 43 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Rectangular.java
+Starting at line 59 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Rectangular.java
+
+	public ComplexNumber multiply(ComplexNumber number) {
+		Polar numPol = number.toPolar();
+		Polar thisPol = toPolar();
+
+		thisPol.setR(thisPol.getR() * numPol.getR());
+=====================================================================
+Found a 5 line (28 tokens) duplication in the following files: 
+Starting at line 21 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Polar.java
+Starting at line 37 of C:\Users\Eu\workspace\JavaTestsUtils\src\pt\bucho\javatestsutils\complex\Polar.java
+
+	public ComplexNumber add(ComplexNumber number) {
+		Rectangular numRec = number.toRectangular();
+		Rectangular thisRec = toRectangular();
+
+		thisRec.setRealPart(thisRec.getRealPart() + numRec.getRealPart());

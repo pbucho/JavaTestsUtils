@@ -208,6 +208,15 @@ public class RectangularTest extends CommonTestClass {
 
 	}
 	
+	@Test
+	public void conjugateTest(){
+		
+		num1.conjugate();
+		
+		assertEquals(re1, num1.getRealPart(), 0.0001);
+		assertEquals(-1 * im1, num1.getImaginaryPart(), 0.0001);
+	}
+	
 	private void mockExpectation() {
 		EasyMock.expect(num2.toRectangular()).andReturn(num2);
 		EasyMock.expect(num2.getRealPart()).andReturn(re2);

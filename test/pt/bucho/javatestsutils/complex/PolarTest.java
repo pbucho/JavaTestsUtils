@@ -220,6 +220,14 @@ public class PolarTest extends CommonTestClass {
 		}
 	}
 	
+	@Test
+	public void conjugateTest(){
+		num1.conjugate();
+		
+		assertEquals(r1, num1.getR(), 0.0001);
+		assertEquals(-1 * t1, num1.getTheta(), 0.0001);
+	}
+	
 	private void resetNum1() {
 		num1.setR(r1);
 		num1.setTheta(t1);

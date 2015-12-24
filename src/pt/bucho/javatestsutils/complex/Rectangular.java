@@ -95,8 +95,10 @@ public class Rectangular implements ComplexNumber {
 
 	@Override
 	public ComplexNumber conjugate() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		imaginaryPart *= -1;
+		
+		return this;
 	}
 	
 	@Override

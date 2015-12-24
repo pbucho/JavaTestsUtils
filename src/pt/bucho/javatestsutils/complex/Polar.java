@@ -4,6 +4,11 @@ public class Polar implements ComplexNumber {
 
 	private double r;
 	private double theta;
+	
+	private final double POSITIVE_REAL_AXIS = 0.0;
+	private final double NEGATIVE_REAL_AXIS = Math.PI;
+	private final double POSITIVE_IMAGINARY_AXIS = Math.PI / 2.0;
+	private final double NEGATIVE_IMAGINARY_AXIS = -1.0 * Math.PI / 2.0;
 
 	public Polar() {
 		this.r = 0.0;
@@ -72,7 +77,7 @@ public class Polar implements ComplexNumber {
 	@Override
 	public ComplexNumber sqrt() {
 		pow(0.5);
-		return null;
+		return this;
 	}
 
 	@Override
@@ -85,8 +90,10 @@ public class Polar implements ComplexNumber {
 
 	@Override
 	public ComplexNumber conjugate() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		theta *= -1;
+		
+		return this;
 	}
 
 	@Override
@@ -135,7 +142,37 @@ public class Polar implements ComplexNumber {
 
 	@Override
 	public Quadrant getQuadrant() {
-		// TODO Auto-generated method stub
+		
+		if(r == 0){
+			return Quadrant.ORIGIN;
+		}
+		
+		convertToMainAngle();
+		
+		if(theta > NEGATIVE_REAL_AXIS && theta < NEGATIVE_IMAGINARY_AXIS){
+			return Quadrant.THRID;
+		}
+		if(theta > NEGATIVE_IMAGINARY_AXIS && theta < POSITIVE_REAL_AXIS){
+			return Quadrant.FOURTH;
+		}
+		if(theta > POSITIVE_REAL_AXIS && theta < POSITIVE_IMAGINARY_AXIS){
+			return Quadrant.FIRST;
+		}
+		if(theta > POSITIVE_IMAGINARY_AXIS && theta < NEGATIVE_IMAGINARY_AXIS + Math.PI * 2.0){
+			return Quadrant.SECOND;
+		}
+		if(theta == POSITIVE_REAL_AXIS){
+			return Quadrant.POSITIVE_REAL_AXIS;
+		}
+		if(theta == NEGATIVE_REAL_AXIS){
+			return Quadrant.NEGATIVE_REAL_AXIS;
+		}
+		if(theta == POSITIVE_IMAGINARY_AXIS){
+			return Quadrant.POSITIVE_IMAGINARY_AXIS;
+		}
+		if(theta == NEGATIVE_IMAGINARY_AXIS){
+			return Quadrant.NEGATIVE_IMAGINARY_AXIS;
+		}
 		return null;
 	}
 
