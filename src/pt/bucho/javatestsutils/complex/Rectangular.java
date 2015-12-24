@@ -170,7 +170,7 @@ public class Rectangular implements ComplexNumber {
 			if (imaginarySignal.equals(Signal.POSITIVE)) {
 				return Quadrant.SECOND;
 			} else if (imaginarySignal.equals(Signal.NEGATIVE)) {
-				return Quadrant.THRID;
+				return Quadrant.THIRD;
 			} else {
 				return Quadrant.NEGATIVE_REAL_AXIS;
 			}

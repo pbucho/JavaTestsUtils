@@ -35,7 +35,7 @@ public class RectangularQuadrantTest extends CommonTestClass {
 		num.setRealPart(-1.0);
 		num.setImaginaryPart(-1.0);
 
-		assertEquals(Quadrant.THRID, num.getQuadrant());
+		assertEquals(Quadrant.THIRD, num.getQuadrant());
 	}
 
 	@Test

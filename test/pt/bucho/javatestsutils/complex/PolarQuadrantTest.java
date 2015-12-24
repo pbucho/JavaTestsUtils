@@ -33,7 +33,7 @@ public class PolarQuadrantTest {
 	public void thirdQuadrantTest(){
 		num.setTheta(-3.0 * Math.PI / 4.0);
 
-		assertEquals(Quadrant.THRID, num.getQuadrant());
+		assertEquals(Quadrant.THIRD, num.getQuadrant());
 	}
 
 	@Test
