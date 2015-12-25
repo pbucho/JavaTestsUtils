@@ -1,26 +1,27 @@
 package pt.bucho.javatestsutils.complex;
 
-public interface ComplexNumber {
+@SuppressWarnings("rawtypes")
+public interface ComplexNumber<T extends ComplexNumber<T>> {
 	
-	public ComplexNumber add(ComplexNumber number);
+	public T add(ComplexNumber number);
 
-	public ComplexNumber subtract(ComplexNumber number);
+	public T subtract(ComplexNumber number);
 
-	public ComplexNumber multiply(ComplexNumber number);
+	public T multiply(ComplexNumber number);
 
-	public ComplexNumber divide(ComplexNumber number);
+	public T divide(ComplexNumber number);
 
-	public ComplexNumber sqrt();
+	public T sqrt();
 
-	public ComplexNumber pow(double power);
+	public T pow(double power);
 
-	public ComplexNumber conjugate();
+	public T conjugate();
 
 	public Quadrant getQuadrant();
 
 	public Rectangular toRectangular();
 	
-	public ComplexNumber transform(ComplexNumber number);
+	public T transform(ComplexNumber number);
 	
 	public Polar toPolar();
 

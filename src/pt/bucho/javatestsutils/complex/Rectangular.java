@@ -4,7 +4,8 @@ enum Signal {
 	POSITIVE, NEGATIVE, ZERO;
 }
 
-public class Rectangular implements ComplexNumber {
+@SuppressWarnings("rawtypes")
+public class Rectangular implements ComplexNumber<Rectangular> {
 	
 	private double realPart;
 	private double imaginaryPart;
@@ -20,7 +21,7 @@ public class Rectangular implements ComplexNumber {
 	}
 	
 	@Override
-	public ComplexNumber add(ComplexNumber number) {
+	public Rectangular add(ComplexNumber number) {
 		Rectangular rec = number.toRectangular();
 
 		this.realPart += rec.getRealPart();
@@ -30,7 +31,7 @@ public class Rectangular implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber subtract(ComplexNumber number) {
+	public Rectangular subtract(ComplexNumber number) {
 		Rectangular rec = number.toRectangular();
 
 		this.realPart -= rec.getRealPart();
@@ -40,7 +41,7 @@ public class Rectangular implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber multiply(ComplexNumber number) {
+	public Rectangular multiply(ComplexNumber number) {
 		Polar numPol = number.toPolar();
 		Polar thisPol = toPolar();
 
@@ -56,7 +57,7 @@ public class Rectangular implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber divide(ComplexNumber number) {
+	public Rectangular divide(ComplexNumber number) {
 		Polar numPol = number.toPolar();
 		Polar thisPol = toPolar();
 
@@ -72,14 +73,14 @@ public class Rectangular implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber sqrt() {
+	public Rectangular sqrt() {
 		pow(0.5);
 
 		return this;
 	}
 
 	@Override
-	public ComplexNumber pow(double power) {
+	public Rectangular pow(double power) {
 		Polar thisPol = toPolar();
 
 		thisPol.setR(Math.pow(thisPol.getR(), power));
@@ -94,7 +95,7 @@ public class Rectangular implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber conjugate() {
+	public Rectangular conjugate() {
 		
 		imaginaryPart *= -1;
 		
@@ -187,7 +188,7 @@ public class Rectangular implements ComplexNumber {
 	}
 	
 	@Override
-	public ComplexNumber transform(ComplexNumber number) {
+	public Rectangular transform(ComplexNumber number) {
 		// TODO Auto-generated method stub
 		return null;
 	}

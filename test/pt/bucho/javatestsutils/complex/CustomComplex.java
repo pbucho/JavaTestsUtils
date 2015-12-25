@@ -1,52 +1,69 @@
 package pt.bucho.javatestsutils.complex;
 
 /**
- * Custom complex class used for testing that mimics the Rectangular with an
- * additional (useless) field variable
+ * Custom complex class used for testing. This class mimics the Rectangular
+ * class with an additional (useless) field variable
  * 
  * @author Pedro Bucho
  *
  */
-public class CustomComplex implements ComplexNumber {
+@SuppressWarnings("rawtypes")
+public class CustomComplex implements ComplexNumber<CustomComplex> {
 
+	private double x;
+	private double y;
+	private double z;
+	
+	public CustomComplex(){
+		this.x = 0;
+		this.y = 0;
+		this.z = 0;
+	}
+	
+	public CustomComplex(double x, double y, double z){
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	
 	@Override
-	public ComplexNumber add(ComplexNumber number) {
+	public CustomComplex add(ComplexNumber number) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ComplexNumber subtract(ComplexNumber number) {
+	public CustomComplex subtract(ComplexNumber number) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ComplexNumber multiply(ComplexNumber number) {
+	public CustomComplex multiply(ComplexNumber number) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ComplexNumber divide(ComplexNumber number) {
+	public CustomComplex divide(ComplexNumber number) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ComplexNumber sqrt() {
+	public CustomComplex sqrt() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ComplexNumber pow(double power) {
+	public CustomComplex pow(double power) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ComplexNumber conjugate() {
+	public CustomComplex conjugate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -64,7 +81,7 @@ public class CustomComplex implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber transform(ComplexNumber number) {
+	public CustomComplex transform(ComplexNumber number) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -73,6 +90,30 @@ public class CustomComplex implements ComplexNumber {
 	public Polar toPolar() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	public double getZ() {
+		return z;
+	}
+
+	public void setZ(double z) {
+		this.z = z;
 	}
 
 }

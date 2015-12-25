@@ -1,6 +1,7 @@
 package pt.bucho.javatestsutils.complex;
 
-public class Polar implements ComplexNumber {
+@SuppressWarnings("rawtypes")
+public class Polar implements ComplexNumber<Polar> {
 
 	private double r;
 	private double theta;
@@ -23,7 +24,7 @@ public class Polar implements ComplexNumber {
 	}
 	
 	@Override
-	public ComplexNumber add(ComplexNumber number) {
+	public Polar add(ComplexNumber number) {
 		Rectangular numRec = number.toRectangular();
 		Rectangular thisRec = toRectangular();
 
@@ -39,7 +40,7 @@ public class Polar implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber subtract(ComplexNumber number) {
+	public Polar subtract(ComplexNumber number) {
 		Rectangular numRec = number.toRectangular();
 		Rectangular thisRec = toRectangular();
 		
@@ -55,7 +56,7 @@ public class Polar implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber multiply(ComplexNumber number) {
+	public Polar multiply(ComplexNumber number) {
 		Polar polar = number.toPolar();
 		
 		this.r *= polar.getR();
@@ -65,7 +66,7 @@ public class Polar implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber divide(ComplexNumber number) {
+	public Polar divide(ComplexNumber number) {
 		Polar polar = number.toPolar();
 		
 		this.r /= polar.getR();
@@ -75,13 +76,13 @@ public class Polar implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber sqrt() {
+	public Polar sqrt() {
 		pow(0.5);
 		return this;
 	}
 
 	@Override
-	public ComplexNumber pow(double power) {
+	public Polar pow(double power) {
 		r = Math.pow(r, power);
 		theta = power * theta;
 		
@@ -89,7 +90,7 @@ public class Polar implements ComplexNumber {
 	}
 
 	@Override
-	public ComplexNumber conjugate() {
+	public Polar conjugate() {
 		
 		theta *= -1;
 		
@@ -177,7 +178,7 @@ public class Polar implements ComplexNumber {
 	}
 	
 	@Override
-	public ComplexNumber transform(ComplexNumber number) {
+	public Polar transform(ComplexNumber number) {
 		// TODO
 		return null;
 	}
