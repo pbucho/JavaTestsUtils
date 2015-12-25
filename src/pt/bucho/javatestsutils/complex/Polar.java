@@ -175,6 +175,12 @@ public class Polar implements ComplexNumber {
 		}
 		return null;
 	}
+	
+	@Override
+	public ComplexNumber transform(ComplexNumber number) {
+		// TODO
+		return null;
+	}
 
 	private void convertToMainAngle() {
 		if (theta <= Math.PI * -1) {
@@ -192,4 +198,5 @@ public class Polar implements ComplexNumber {
 			throw new IllegalArgumentException("Length can't be negative");
 		}
 	}
+
 }

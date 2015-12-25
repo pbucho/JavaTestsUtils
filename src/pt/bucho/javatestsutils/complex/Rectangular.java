@@ -185,6 +185,12 @@ public class Rectangular implements ComplexNumber {
 		}
 		return null;
 	}
+	
+	@Override
+	public ComplexNumber transform(ComplexNumber number) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	private Signal getRealSignal() {
 		if (realPart > 0) {

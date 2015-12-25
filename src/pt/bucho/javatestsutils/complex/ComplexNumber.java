@@ -1,7 +1,7 @@
 package pt.bucho.javatestsutils.complex;
 
 public interface ComplexNumber {
-
+	
 	public ComplexNumber add(ComplexNumber number);
 
 	public ComplexNumber subtract(ComplexNumber number);
@@ -19,7 +19,9 @@ public interface ComplexNumber {
 	public Quadrant getQuadrant();
 
 	public Rectangular toRectangular();
-
+	
+	public ComplexNumber transform(ComplexNumber number);
+	
 	public Polar toPolar();
 
 }
