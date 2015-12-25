@@ -56,9 +56,4 @@ public class QuadrantTest {
 		assertEquals(new Integer(0), Quadrant.ORIGIN.getValue());
 	}
 	
-	@Test
-	public void anglesTest(){
-		fail("Implement test to create method to return values of axes");
-	}
-
 }
