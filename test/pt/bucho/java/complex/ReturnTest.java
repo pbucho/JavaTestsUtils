@@ -12,7 +12,6 @@ import pt.bucho.java.complex.Rectangular;
 
 public class ReturnTest extends CommonTestClass{
 
-	@SuppressWarnings("rawtypes")
 	ComplexNumber cn;
 	Rectangular rec1, rec2;
 	Polar pol1, pol2;

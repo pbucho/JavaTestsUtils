@@ -8,8 +8,7 @@ package pt.bucho.java.complex;
  * @author Pedro Bucho
  *
  */
-@SuppressWarnings("rawtypes")
-public class CustomComplex implements ComplexNumber<CustomComplex> {
+public class CustomComplex implements ComplexNumber {
 
 	private double x;
 	private double y;

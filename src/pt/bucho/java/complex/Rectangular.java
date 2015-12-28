@@ -12,8 +12,7 @@ enum Signal {
  * @author Pedro Bucho
  *
  */
-@SuppressWarnings("rawtypes")
-public class Rectangular implements ComplexNumber<Rectangular> {
+public class Rectangular implements ComplexNumber {
 	
 	private double realPart;
 	private double imaginaryPart;

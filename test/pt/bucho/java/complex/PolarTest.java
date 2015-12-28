@@ -350,7 +350,6 @@ public class PolarTest extends CommonTestClass {
 		assertEquals(0.0, num1.getTheta(), 0.0);
 	}
 	
-	@SuppressWarnings("rawtypes")
 	@Test
 	public void complexArgumentConstructorTest(){
 		

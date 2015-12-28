@@ -337,7 +337,6 @@ public class RectangularTest extends CommonTestClass {
 		
 	}
 	
-	@SuppressWarnings("rawtypes")
 	@Test
 	public void complexArgumentConstructorTest(){
 		

@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class CustomComplexTest extends CommonTestClass{
 
-	@SuppressWarnings("rawtypes")
 	ComplexNumber cn;
 	CustomComplex num1, num2;
 	Rectangular rec1;

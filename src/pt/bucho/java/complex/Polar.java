@@ -11,8 +11,7 @@ package pt.bucho.java.complex;
  * @author Eu
  *
  */
-@SuppressWarnings("rawtypes")
-public class Polar implements ComplexNumber<Polar> {
+public class Polar implements ComplexNumber {
 
 	private double r;
 	private double theta;
