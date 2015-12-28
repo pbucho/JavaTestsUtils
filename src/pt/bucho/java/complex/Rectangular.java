@@ -18,14 +18,17 @@ public class Rectangular implements ComplexNumber<Rectangular> {
 	private double realPart;
 	private double imaginaryPart;
 
-	public Rectangular() {
-		this.realPart = 0.0;
-		this.imaginaryPart = 0.0;
-	}
-	
 	public Rectangular(double real, double imaginary) {
 		this.realPart = real;
 		this.imaginaryPart = imaginary;
+	}
+	
+	public Rectangular() {
+		this(0.0, 0.0);
+	}
+
+	public Rectangular(ComplexNumber number){
+		this(number.toRectangular().getRealPart(), number.toRectangular().getImaginaryPart());
 	}
 	
 	@Override

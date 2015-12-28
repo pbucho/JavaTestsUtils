@@ -1,39 +1,42 @@
 package pt.bucho.java.complex;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
-import pt.bucho.java.complex.Polar;
-import pt.bucho.java.complex.Rectangular;
+public class CustomComplexTest extends CommonTestClass{
 
-public class CustomComplexTest extends CommonTestClass {
-
+	@SuppressWarnings("rawtypes")
+	ComplexNumber cn;
 	CustomComplex num1, num2;
+	Rectangular rec1;
 	Polar p1;
-	Rectangular r1;
 
 	@Before
-	public void setUp() throws Exception {
-		num1 = new CustomComplex(re1, im1, im1);
+	public void setUp() {
+		num1 = new CustomComplex();
+		num1.setX(re1);
+		num1.setY(im1);
 		num2 = EasyMock.createMock(CustomComplex.class);
+		rec1 = EasyMock.createMock(Rectangular.class);
 		p1 = EasyMock.createMock(Polar.class);
-		r1 = EasyMock.createMock(Rectangular.class);
+		cn = EasyMock.createMock(ComplexNumber.class);
 	}
 
 	@Test
 	public void customAdditionTest() {
 
-		EasyMock.expect(num2.transform(number))
+		EasyMock.expect(cn.toRectangular()).andReturn(rec1);
+		EasyMock.expect(rec1.getRealPart()).andReturn(re2);
+		EasyMock.expect(rec1.getImaginaryPart()).andReturn(im2);
 		
-		EasyMock.replay(num2);
-
-		num1.add(num2);
-
-		EasyMock.verify(num2);
-
+		EasyMock.replay(cn, rec1);
+		num1.add(cn);
+		EasyMock.verify(cn, rec1);
+		
 		assertEquals(re1 + re2, num1.getX(), 0.0);
 		assertEquals(im1 + im2, num1.getY(), 0.0);
 
@@ -42,14 +45,14 @@ public class CustomComplexTest extends CommonTestClass {
 	@Test
 	public void customSubtractionTest() {
 
-		mockExpectation();
-
-		EasyMock.replay(num2);
-
-		num1.subtract(num2);
-
-		EasyMock.verify(num2);
-
+		EasyMock.expect(cn.toRectangular()).andReturn(rec1);
+		EasyMock.expect(rec1.getRealPart()).andReturn(re2);
+		EasyMock.expect(rec1.getImaginaryPart()).andReturn(im2);
+		
+		EasyMock.replay(cn, rec1);
+		num1.subtract(cn);
+		EasyMock.verify(cn, rec1);
+		
 		assertEquals(re1 - re2, num1.getX(), 0.0);
 		assertEquals(im1 - im2, num1.getY(), 0.0);
 
@@ -58,90 +61,52 @@ public class CustomComplexTest extends CommonTestClass {
 	@Test
 	public void customMultiplicationTest() {
 
-		EasyMock.expect(num2.toPolar()).andReturn(p1);
+		EasyMock.expect(cn.toPolar()).andReturn(p1);
 		EasyMock.expect(p1.getR()).andReturn(r1);
 		EasyMock.expect(p1.getTheta()).andReturn(t1);
+		
+		EasyMock.replay(cn, p1);
+		num1.multiply(cn);
+		EasyMock.verify(cn, p1);
+		
+		double expectedX = Math.pow(r1, 2) * Math.cos(2 * t1);
+		double expectedY = Math.pow(r1, 2) * Math.sin(2 * t1);
 
-		EasyMock.replay(num2, p1);
-		num1.multiply(num2);
-		EasyMock.verify(num2, p1);
-
-		double expectedRe = Math.pow(r1, 2) * Math.cos(2 * t1);
-		double expectedIm = Math.pow(r1, 2) * Math.sin(2 * t1);
-
-		assertEquals(expectedRe, num1.getX(), 0.0001);
-		assertEquals(expectedIm, num1.getY(), 0.0001);
+		assertEquals(expectedX, num1.getX(), 0.0);
+		assertEquals(expectedY, num1.getY(), 0.0);
 
 	}
 
 	@Test
 	public void customDivisionTest() {
 
-		EasyMock.expect(num2.toPolar()).andReturn(p1);
+		EasyMock.expect(cn.toPolar()).andReturn(p1);
 		EasyMock.expect(p1.getR()).andReturn(r1);
 		EasyMock.expect(p1.getTheta()).andReturn(t1);
+		
+		EasyMock.replay(cn, p1);
+		num1.divide(cn);
+		EasyMock.verify(cn, p1);
+		
+		double expectedX = Math.cos(0.0);
+		double expectedY = Math.sin(0.0);
 
-		EasyMock.replay(num2, p1);
-		num1.divide(num2);
-		EasyMock.verify(num2, p1);
-
-		double expectedRe = Math.cos(0.0);
-		double expectedIm = Math.sin(0.0);
-
-		assertEquals(expectedRe, num1.getX(), 0.0001);
-		assertEquals(expectedIm, num1.getY(), 0.0001);
+		assertEquals(expectedX, num1.getX(), 0.0);
+		assertEquals(expectedY, num1.getY(), 0.0);
 
 	}
 
 	@Test
 	public void customPowerTest() {
 
-		double expectedRe;
-		double expectedIm;
-
 		num1.pow(2);
 
-		expectedRe = Math.pow(r1, 2) * Math.cos(2 * t1);
-		expectedIm = Math.pow(r1, 2) * Math.sin(2 * t1);
+		double expectedX = Math.pow(r1, 2) * Math.cos(2 * t1);
+		double expectedY = Math.pow(r1, 2) * Math.sin(2 * t1);
 
-		assertEquals(expectedRe, num1.getRealPart(), 0.0001);
-		assertEquals(expectedIm, num1.getImaginaryPart(), 0.0001);
+		assertEquals(expectedX, num1.getX(), 0.0);
+		assertEquals(expectedY, num1.getY(), 0.0);
 
-		resetNum1();
-		num1.pow(3);
-
-		expectedRe = Math.pow(r1, 3) * Math.cos(3 * t1);
-		expectedIm = Math.pow(r1, 3) * Math.sin(3 * t1);
-
-		assertEquals(expectedRe, num1.getX(), 0.0001);
-		assertEquals(expectedIm, num1.getY(), 0.0001);
-
-		resetNum1();
-		num1.pow(0);
-
-		expectedRe = Math.cos(0.0);
-		expectedIm = Math.sin(0.0);
-
-		assertEquals(expectedRe, num1.getX(), 0.0001);
-		assertEquals(expectedIm, num1.getY(), 0.0001);
-
-		resetNum1();
-		num1.pow(-1);
-
-		expectedRe = Math.pow(r1, -1) * Math.cos(-1 * t1);
-		expectedIm = Math.pow(r1, -1) * Math.sin(-1 * t1);
-
-		assertEquals(expectedRe, num1.getX(), 0.0001);
-		assertEquals(expectedIm, num1.getY(), 0.0001);
-
-		resetNum1();
-		num1.pow(-8.9845);
-
-		expectedRe = Math.pow(r1, -8.9845) * Math.cos(-8.9845 * t1);
-		expectedIm = Math.pow(r1, -8.9845) * Math.sin(-8.9845 * t1);
-
-		assertEquals(expectedRe, num1.getX(), 0.0001);
-		assertEquals(expectedIm, num1.getY(), 0.0001);
 	}
 
 	@Test
@@ -149,80 +114,32 @@ public class CustomComplexTest extends CommonTestClass {
 
 		num1.sqrt();
 
-		double expectedRe = Math.pow(r1, 0.5) * Math.cos(0.5 * t1);
-		double expectedIm = Math.pow(r1, 0.5) * Math.sin(0.5 * t1);
+		double expectedX = Math.pow(r1, 0.5) * Math.cos(0.5 * t1);
+		double expectedY = Math.pow(r1, 0.5) * Math.sin(0.5 * t1);
 
-		assertEquals(expectedRe, num1.getX(), 0.0001);
-		assertEquals(expectedIm, num1.getY(), 0.0001);
+		assertEquals(expectedX, num1.getX(), 0.0);
+		assertEquals(expectedY, num1.getY(), 0.0);
 	}
 
 	@Test
-	public void rectangularToRectangularReturnsItself() {
-		assertSame(num1, num1.toRectangular());
+	public void customToCustomReturnsItself() {
+		assertSame(num1, num1.transform(num1));
 	}
 
 	@Test
-	public void customToPolarTest() {
+	public void rectangularToCustomTest() {
 
-		Polar polar = num1.toPolar();
-
-		assertEquals(r1, polar.getR(), 0.0);
-		assertEquals(t1, polar.getTheta(), 0.0001);
-
-	}
-
-	@Test
-	public void equalsTest() {
-
-		EasyMock.expect(num2.toRectangular()).andReturn(num2);
-		EasyMock.expect(num2.getRealPart()).andReturn(re1);
-		EasyMock.expect(num2.getImaginaryPart()).andReturn(im1);
-
-		EasyMock.replay(num2);
-		assertTrue(num1.equals(num2));
-		EasyMock.verify(num2);
-
-		EasyMock.reset(num2);
-		EasyMock.expect(num2.toRectangular()).andReturn(num2);
-		EasyMock.expect(num2.getRealPart()).andReturn(re2);
-		EasyMock.expect(num2.getImaginaryPart()).andReturn(im2);
-
-		EasyMock.replay(num2);
-		assertFalse(num1.equals(num2));
-		EasyMock.verify(num2);
-	}
-
-	@Test
-	public void stringTest() {
-		assertEquals("1.0+1.0i", num1.toString());
-
-		num1.setRealPart(-1.0);
-		assertEquals("-1.0+1.0i", num1.toString());
-
-		num1.setImaginaryPart(-1.0);
-		assertEquals("-1.0-1.0i", num1.toString());
-
-		num1.setRealPart(1.0);
-		assertEquals("1.0-1.0i", num1.toString());
-
-		num1.setImaginaryPart(0.0);
-		assertEquals("1.0+0.0i", num1.toString());
-
-	}
-
-	@Test
-	public void conjugateTest() {
-
-		num1.conjugate();
-
-		assertEquals(re1, num1.getX(), 0.0001);
-		assertEquals(-1 * im1, num1.getY(), 0.0001);
-	}
-
-	private void resetNum1() {
-		num1.setX(re1);
-		num1.setY(im1);
-		num1.setZ(im1);
+		EasyMock.expect(rec1.toRectangular()).andReturn(rec1);
+		EasyMock.expect(rec1.getRealPart()).andReturn(re2);
+		EasyMock.expect(rec1.getImaginaryPart()).andReturn(im2);
+		
+		EasyMock.replay(rec1);
+		num1.transform(rec1);
+		EasyMock.verify(rec1);		
+		
+		assertEquals(re2, num1.getX(), 0.0);
+		assertEquals(im2, num1.getY(), 0.0);
+		
 	}
 
 }

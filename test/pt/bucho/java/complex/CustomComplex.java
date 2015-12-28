@@ -1,9 +1,5 @@
 package pt.bucho.java.complex;
 
-import pt.bucho.java.complex.ComplexNumber;
-import pt.bucho.java.complex.Polar;
-import pt.bucho.java.complex.Quadrant;
-import pt.bucho.java.complex.Rectangular;
 
 /**
  * Custom complex class used for testing. This class mimics the Rectangular
@@ -33,38 +29,80 @@ public class CustomComplex implements ComplexNumber<CustomComplex> {
 	
 	@Override
 	public CustomComplex add(ComplexNumber number) {
-		// TODO Auto-generated method stub
-		return null;
+		CustomComplex cusNum = new CustomComplex();
+		cusNum.transform(number);
+		
+		x += cusNum.getX();
+		y += cusNum.getY();
+		
+		return this;
 	}
 
 	@Override
 	public CustomComplex subtract(ComplexNumber number) {
-		// TODO Auto-generated method stub
-		return null;
+		CustomComplex cusNum = new CustomComplex();
+		cusNum.transform(number);
+		
+		x -= cusNum.getX();
+		y -= cusNum.getY();
+		
+		return this;
 	}
 
 	@Override
 	public CustomComplex multiply(ComplexNumber number) {
-		// TODO Auto-generated method stub
-		return null;
+		Polar polarNum = number.toPolar();
+		Polar thisPol = toPolar();
+		
+		thisPol.setR(thisPol.getR() * polarNum.getR());
+		thisPol.setTheta(thisPol.getTheta() + polarNum.getTheta());
+		
+		CustomComplex thisCustom = new CustomComplex();
+		thisCustom.transform(thisPol);
+		
+		x = thisCustom.getX();
+		y = thisCustom.getY();
+		
+		return this;
+		
 	}
 
 	@Override
 	public CustomComplex divide(ComplexNumber number) {
-		// TODO Auto-generated method stub
-		return null;
+		Polar polarNum = number.toPolar();
+		Polar thisPol = toPolar();
+		
+		thisPol.setR(thisPol.getR() / polarNum.getR());
+		thisPol.setTheta(thisPol.getTheta() - polarNum.getTheta());
+		
+		CustomComplex thisCustom = new CustomComplex();
+		thisCustom.transform(thisPol);
+		
+		x = thisCustom.getX();
+		y = thisCustom.getY();
+		
+		return this;
 	}
 
 	@Override
 	public CustomComplex sqrt() {
-		// TODO Auto-generated method stub
-		return null;
+		return pow(0.5);
 	}
 
 	@Override
 	public CustomComplex pow(double power) {
-		// TODO Auto-generated method stub
-		return null;
+		Polar thisPol = toPolar();
+
+		thisPol.setR(Math.pow(thisPol.getR(), power));
+		thisPol.setTheta(power * thisPol.getTheta());
+
+		CustomComplex thisCustom = new CustomComplex();
+		thisCustom.transform(thisPol);
+		
+		x = thisCustom.getX();
+		y = thisCustom.getY();
+
+		return this;
 	}
 
 	@Override
@@ -81,20 +119,22 @@ public class CustomComplex implements ComplexNumber<CustomComplex> {
 
 	@Override
 	public Rectangular toRectangular() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Rectangular(x, y);
 	}
 
 	@Override
 	public CustomComplex transform(ComplexNumber number) {
-		// TODO Auto-generated method stub
-		return null;
+		Rectangular numRec = number.toRectangular();
+		
+		x = numRec.getRealPart();
+		y = numRec.getImaginaryPart();
+		
+		return this;
 	}
 
 	@Override
 	public Polar toPolar() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Polar(getLength(), Math.asin(y / getLength()));
 	}
 
 	public double getX() {
@@ -119,6 +159,10 @@ public class CustomComplex implements ComplexNumber<CustomComplex> {
 
 	public void setZ(double z) {
 		this.z = z;
+	}
+	
+	private double getLength() {
+		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
 
 }

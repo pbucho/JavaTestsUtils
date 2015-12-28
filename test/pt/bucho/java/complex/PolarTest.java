@@ -45,6 +45,25 @@ public class PolarTest extends CommonTestClass {
 	}
 	
 	@Test
+	public void rectangularAdditionTest(){
+		
+		EasyMock.expect(rec.toRectangular()).andReturn(rec);
+		EasyMock.expect(rec.getRealPart()).andReturn(re2);
+		EasyMock.expect(rec.getImaginaryPart()).andReturn(im2);
+		
+		EasyMock.replay(rec);
+		num1.add(rec);
+		EasyMock.verify(rec);
+		
+		double expectedR = Math.sqrt(Math.pow(re1 + re2, 2) + Math.pow(im1 + im2, 2));
+		double expectedTheta = Math.asin((im1 + im2) / expectedR);
+
+		assertEquals(expectedR, num1.getR(), 0.0001);
+		assertEquals(expectedTheta, num1.getTheta(), 0.0001);
+		
+	}
+	
+	@Test
 	public void polarSubtractionTest() {
 
 		EasyMock.expect(num2.toRectangular()).andReturn(rec);
@@ -61,6 +80,25 @@ public class PolarTest extends CommonTestClass {
 
 		assertEquals(expectedR, num1.getR(), 0.0001);
 		assertEquals(expectedTheta, num1.getTheta(), 0.0001);
+	}
+	
+	@Test
+	public void rectangularSubtractionTest(){
+		
+		EasyMock.expect(rec.toRectangular()).andReturn(rec);
+		EasyMock.expect(rec.getRealPart()).andReturn(re2);
+		EasyMock.expect(rec.getImaginaryPart()).andReturn(im2);
+		
+		EasyMock.replay(rec);
+		num1.subtract(rec);
+		EasyMock.verify(rec);
+		
+		double expectedR = Math.sqrt(Math.pow(re1 - re2, 2) + Math.pow(im1 - im2, 2));
+		double expectedTheta = Math.asin((im1 - im2) / expectedR);
+
+		assertEquals(expectedR, num1.getR(), 0.0001);
+		assertEquals(expectedTheta, num1.getTheta(), 0.0001);
+		
 	}
 	
 	@Test
@@ -81,6 +119,21 @@ public class PolarTest extends CommonTestClass {
 	}
 	
 	@Test
+	public void rectangularMultiplicationTest(){
+		
+		EasyMock.expect(rec.toPolar()).andReturn(num2);
+		EasyMock.expect(num2.getR()).andReturn(r2);
+		EasyMock.expect(num2.getTheta()).andReturn(t2);
+		
+		EasyMock.replay(rec, num2);
+		num1.multiply(rec);
+		EasyMock.verify(rec, num2);
+		
+		assertEquals(r1 * r2, num1.getR(), 0.0001);
+		assertEquals(t1 + t2, num1.getTheta(), 0.0001);
+	}
+	
+	@Test
 	public void polarDivisionTest() {
 
 		EasyMock.expect(num2.toPolar()).andReturn(num2);
@@ -93,6 +146,21 @@ public class PolarTest extends CommonTestClass {
 
 		EasyMock.verify(num2);
 
+		assertEquals(r1 / r2, num1.getR(), 0.0001);
+		assertEquals(t1 - t2, num1.getTheta(), 0.0001);
+	}
+	
+	@Test
+	public void rectangularDivisionTest(){
+		
+		EasyMock.expect(rec.toPolar()).andReturn(num2);
+		EasyMock.expect(num2.getR()).andReturn(r2);
+		EasyMock.expect(num2.getTheta()).andReturn(t2);
+		
+		EasyMock.replay(rec, num2);
+		num1.divide(rec);
+		EasyMock.verify(rec, num2);
+		
 		assertEquals(r1 / r2, num1.getR(), 0.0001);
 		assertEquals(t1 - t2, num1.getTheta(), 0.0001);
 	}
@@ -229,6 +297,75 @@ public class PolarTest extends CommonTestClass {
 		
 		assertEquals(r1, num1.getR(), 0.0001);
 		assertEquals(-1 * t1, num1.getTheta(), 0.0001);
+	}
+	
+	@Test
+	public void rectangularArgumentConstructorTest(){
+		
+		EasyMock.expect(rec.toPolar()).andReturn(num2).times(2);
+		EasyMock.expect(num2.getR()).andReturn(r2);
+		EasyMock.expect(num2.getTheta()).andReturn(t2);
+		
+		EasyMock.replay(rec, num2);
+		num1 = new Polar(rec);
+		EasyMock.verify(rec, num2);
+		
+		assertEquals(r2, num1.getR(), 0.0);
+		assertEquals(t2, num1.getTheta(), 0.0);
+		
+	}
+	
+	@Test
+	public void polarArgumentConstructorTest(){
+
+		EasyMock.expect(num2.toPolar()).andReturn(num2).times(2);
+		EasyMock.expect(num2.getR()).andReturn(r2);
+		EasyMock.expect(num2.getTheta()).andReturn(t2);
+		
+		EasyMock.replay(rec, num2);
+		num1 = new Polar(num2);
+		EasyMock.verify(rec, num2);
+		
+		assertEquals(r2, num1.getR(), 0.0);
+		assertEquals(t2, num1.getTheta(), 0.0);
+		
+	}
+	
+	@Test
+	public void doubleArgumentConstructorTest(){
+		
+		num1 = new Polar(r2, t2);
+		
+		assertEquals(r2, num1.getR(), 0.0);
+		assertEquals(t2, num1.getTheta(), 0.0);
+		
+	}
+	
+	@Test
+	public void noArgConstructorTest(){
+		
+		num1 = new Polar();
+		
+		assertEquals(0.0, num1.getR(), 0.0);
+		assertEquals(0.0, num1.getTheta(), 0.0);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void complexArgumentConstructorTest(){
+		
+		ComplexNumber complex = EasyMock.createMock(ComplexNumber.class);
+		EasyMock.expect(complex.toPolar()).andReturn(num2).times(2);
+		EasyMock.expect(num2.getR()).andReturn(r2);
+		EasyMock.expect(num2.getTheta()).andReturn(t2);
+		
+		EasyMock.replay(complex, num2);
+		num1 = new Polar(complex);
+		EasyMock.verify(complex, num2);
+		
+		assertEquals(r2, num1.getR(), 0.0);
+		assertEquals(t2, num1.getTheta(), 0.0);
+		
 	}
 	
 	private void resetNum1() {

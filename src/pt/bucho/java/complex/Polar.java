@@ -22,16 +22,19 @@ public class Polar implements ComplexNumber<Polar> {
 	private final double POSITIVE_IMAGINARY_AXIS = Math.PI / 2.0;
 	private final double NEGATIVE_IMAGINARY_AXIS = -1.0 * Math.PI / 2.0;
 
-	public Polar() {
-		this.r = 0.0;
-		this.theta = 0.0;
-	}
-
 	public Polar(double r, double theta) throws IllegalArgumentException {
 		this.r = r;
 		this.theta = theta;
 		checkLength();
 		convertToMainAngle();
+	}
+	
+	public Polar(){
+		this(0.0, 0.0);
+	}
+	
+	public Polar(ComplexNumber number){
+		this(number.toPolar().getR(), number.toPolar().getTheta());
 	}
 	
 	@Override
