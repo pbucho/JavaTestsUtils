@@ -6,56 +6,51 @@ package pt.bucho.java.complex;
  * {@link Polar}. Therefore, there are the methods
  * {@link ComplexNumber#toRectangular()} and {@link ComplexNumber#toPolar()}
  * that work as a link between other possible implementations.
- *
- * @see https://en.wikipedia.org/wiki/Complex_number
  * 
  * @author Pedro Bucho
  *
- * @param <T>
- *            the type of complex number being implemented
  */
-@SuppressWarnings("rawtypes")
-public interface ComplexNumber<T> {
+public interface ComplexNumber {
 	/**
 	 * This method adds a complex number to the current complex number.
 	 * @param number
 	 * @return this
 	 */
-	public T add(ComplexNumber number);
+	public ComplexNumber add(ComplexNumber number);
 	/**
 	 * This method subtracts a complex number from the current complex number.
 	 * @param number
 	 * @return this
 	 */
-	public T subtract(ComplexNumber number);
+	public ComplexNumber subtract(ComplexNumber number);
 	/**
 	 * This method multiplies a complex number by this complex number.
 	 * @param number
 	 * @return this
 	 */
-	public T multiply(ComplexNumber number);
+	public ComplexNumber multiply(ComplexNumber number);
 	/**
 	 * This method divides this complex number by another complex number.
 	 * @param number
 	 * @return this
 	 */
-	public T divide(ComplexNumber number);
+	public ComplexNumber divide(ComplexNumber number);
 	/**
 	 * This method calculates the square root of this complex number.
 	 * @return this
 	 */
-	public T sqrt();
+	public ComplexNumber sqrt();
 	/**
 	 * This method calculates the power of this complex number.
 	 * @param power
 	 * @return this
 	 */
-	public T pow(double power);
+	public ComplexNumber pow(double power);
 	/**
 	 * This method calculates the conjugate of this complex number.
 	 * @return this
 	 */
-	public T conjugate();
+	public ComplexNumber conjugate();
 	/**
 	 * This method returns the quadrant of Argand's Plane where this complex number is located.
 	 * @return quadrant
@@ -76,7 +71,7 @@ public interface ComplexNumber<T> {
 	 * @param number
 	 * @return
 	 */
-	public T transform(ComplexNumber number);
+	public ComplexNumber transform(ComplexNumber number);
 	/**
 	 * This method returns the representation of this complex number in the Polar form.
 	 * @return polar number
