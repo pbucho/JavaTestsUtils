@@ -50,5 +50,15 @@ public class CarStandTest {
 		Car car = carStand.sellCar("jeep");
 		assertEquals("black", car.getColor());
 	}
+	
+	@Test
+	public void jeepFactoryGreenCar(){
+		CarFactory carFactory = new JeepFactory();
+		carStand.setCarFactory(carFactory);
+		
+		Car car = carStand.sellCar("green");
+		assertEquals("green", car.getColor());
+		
+	}
 
 }
