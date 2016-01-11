@@ -2,6 +2,8 @@ package pt.bucho.java.designpatterns.command;
 
 public interface Command {
 	
-	public void execute();
+	public void activate();
+
+	public void deactivate();
 
 }
