@@ -34,3 +34,50 @@ public class ObjectCommandTest {
 	}
 
 }
+
+class ObjectCommand implements Command {
+	
+	private TestObject tobj;
+
+	public ObjectCommand(TestObject tobj) {
+		this.tobj = tobj;
+	}
+
+	@Override
+	public void activate() {
+		tobj.activate();
+	}
+
+	@Override
+	public void deactivate() {
+		tobj.deactivate();
+	}
+
+}
+
+class TestObject {
+	
+	private String status;
+
+	public TestObject() {
+		status = "UNITIALIZED";
+	}
+
+	public void activate() {
+		status = "ACTIVATED";
+	}
+
+	public void deactivate() {
+		status = "DEACTIVATED";
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	@Override
+	public String toString() {
+		return getStatus();
+	}
+
+}
